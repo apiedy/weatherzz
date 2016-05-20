@@ -31,7 +31,7 @@ function getDate(){
 				+	currentdate.getSeconds();
 	$("#datetime_display").html(dateTime);
 }
-//get user loaction
+//get user location
 function getLocation(){
 	console.log("getting location");
 	navigator.geolocation.getCurrentPosition(function(position){
@@ -132,6 +132,7 @@ function clearInfo(){
 }
 //getting other location information
 function getOtherLocation(){
+	$('#show_more_location').attr("id","show_more_new_location");
 	$('#more_weather_display').html('');
 	$('#more_location_display').html('');
 	city = $('#city').val();
@@ -145,5 +146,30 @@ function getOtherLocation(){
 		//close dropdown
 		$('.navbar-toggle').click();
 		getMoreWeather(city, state);
+	});
+	$('#show_more_new_location').click(function(e){
+		console.log(22);
+		e.preventDefault();
+		//close dropdown
+		$('.navbar-toggle').click();
+		getMoreNewLocation(city,state);
+		$('#show_more_new_location').attr("id","show_more_location");
+	});
+}
+//get new location additional information
+function getMoreNewLocation(city, state){
+	console.log("getting new location information");
+	$.ajax({
+		url:'https://maps.googleapis.com/maps/api/geocode/json?address='+city+'+'+state,
+		datatype: 'jsonp',
+		success: function(response){
+			console.log("new location:"+city);
+			lat = response.results[0].geometry.location.lat;
+			lon = response.results[0].geometry.location.lng;
+			html = '<ul id="more_location_list" class="list-group">'+
+				'<li class="list-group-item"><strong>Latitude  : </strong>'+lat+'</li>'+
+				'<li class="list-group-item"><strong>Longitude : </strong>'+lon+'</li></ul>';
+			$('#more_location_display').html(html);
+		}
 	});
 }
