@@ -4,7 +4,7 @@ $(document).ready(function(){
 
 });
 function onDeviceReady(){
-	console.log("hi from space");
+	console.log("Device ready...");
 	$('#show_more_location').click(function(e){
 		e.preventDefault();
 		getMoreLocation();
@@ -33,7 +33,7 @@ function getDate(){
 }
 //get user location
 function getLocation(){
-	console.log("getting location");
+	console.log("Getting location");
 	navigator.geolocation.getCurrentPosition(function(position){
 		var lat = position.coords.latitude;
 		var lon = position.coords.longitude;
@@ -64,7 +64,7 @@ function getLocation(){
 }
 //get some extra location info
 function getMoreLocation(){
-	console.log("getting more location info");
+	console.log("Getting more location information");
 
 	//close dropdown
 	$('.navbar-toggle').click();
@@ -81,14 +81,12 @@ function getMoreLocation(){
 }
 
 function getWeather(city, state){
-	console.log("weather for:"+city);
+	console.log("Weather for:"+city);
 	var html = '';
 	$.ajax({
 		url: "http://api.wunderground.com/api/3f102a095eb841bb/conditions/q/"+state+"/"+city+".json",
 		datatype: 'jsonp',
 		success: function(parsedjson){
-			console.log(parsedjson);
-
 			weather = parsedjson['current_observation']['weather'];
 			tempString = parsedjson['current_observation']['temperature_string'];
 			iconUrl = parsedjson['current_observation']['icon_url'];
@@ -101,7 +99,7 @@ function getWeather(city, state){
 }
 //display more weather info
 function getMoreWeather(city, state){
-	console.log("getting more weather");
+	console.log("Getting more weather information");
 	var html = '';
 	$.ajax({
 		url: "http://api.wunderground.com/api/3f102a095eb841bb/conditions/q/"+state+"/"+city+".json",
@@ -148,7 +146,6 @@ function getOtherLocation(){
 		getMoreWeather(city, state);
 	});
 	$('#show_more_new_location').click(function(e){
-		console.log(22);
 		e.preventDefault();
 		//close dropdown
 		$('.navbar-toggle').click();
@@ -158,12 +155,12 @@ function getOtherLocation(){
 }
 //get new location additional information
 function getMoreNewLocation(city, state){
-	console.log("getting new location information");
+	console.log("Getting new location information");
 	$.ajax({
 		url:'https://maps.googleapis.com/maps/api/geocode/json?address='+city+'+'+state,
 		datatype: 'jsonp',
 		success: function(response){
-			console.log("new location:"+city);
+			console.log("New location:"+city);
 			lat = response.results[0].geometry.location.lat;
 			lon = response.results[0].geometry.location.lng;
 			html = '<ul id="more_location_list" class="list-group">'+
