@@ -1,0 +1,18 @@
+body{
+	background-color: #64A0B3;
+	color: #FFFFFF;
+}
+.panel,.panel-heading, .list-group,.list-group li{
+	background-color: #477F91 !important;
+	color: #FFFFFF !important; 
+}
+#weather {
+	margin-bottom: 20px;
+}
+footer {
+	text-align: center;
+	color: #FFFFFF;
+	background-color: #333333;
+	height: 40px;
+	padding-top: 10px;
+}
