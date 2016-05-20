@@ -13,6 +13,10 @@ function onDeviceReady(){
 		e.preventDefault();
 		clearInfo();
 	});
+	$('#other_location').submit(function(e){
+		e.preventDefault();
+		getOtherLocation();
+	});
 	getDate(); 
 	getLocation();
 }
@@ -98,7 +102,6 @@ function getWeather(city, state){
 //display more weather info
 function getMoreWeather(city, state){
 	console.log("getting more weather");
-
 	var html = '';
 	$.ajax({
 		url: "http://api.wunderground.com/api/3f102a095eb841bb/conditions/q/"+state+"/"+city+".json",
@@ -124,4 +127,16 @@ function clearInfo(){
 	$('.navbar-toggle').click();
 	$('#more_weather_display').html('');
 	$('#more_location_display').html('');
+}
+//getting other location information
+function getOtherLocation(){
+	$('#more_weather_display').html('');
+	$('#more_location_display').html('');
+	city = $('#city').val();
+	state= $('#state').val();
+	var html = '';
+	html = '<h1>'+city+', '+state+'</h1>';
+	$('#myLocation').html(html);
+	getWeather(city, state);
+	
 }
