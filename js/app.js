@@ -127,6 +127,8 @@ function clearInfo(){
 	$('.navbar-toggle').click();
 	$('#more_weather_display').html('');
 	$('#more_location_display').html('');
+	$('#city').val('');
+	$('#state').val('');
 }
 //getting other location information
 function getOtherLocation(){
@@ -138,5 +140,10 @@ function getOtherLocation(){
 	html = '<h1>'+city+', '+state+'</h1>';
 	$('#myLocation').html(html);
 	getWeather(city, state);
-	
+	$('#show_more_weather').click(function(e){
+		e.preventDefault();
+		//close dropdown
+		$('.navbar-toggle').click();
+		getMoreWeather(city, state);
+	});
 }
